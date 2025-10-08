@@ -1,302 +1,207 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MyLabInsight Blog – Evidence‑Based Guides & Updates</title>
-  <meta name="description" content="Evidence‑based explainers on lab results, screening schedules, and preventive health. Learn how to read your labs and see how the MyLabInsight app works." />
-  <meta property="og:title" content="MyLabInsight Blog – Evidence‑Based Guides & Updates" />
-  <meta property="og:description" content="Evidence‑based explainers on lab results, screening schedules, and preventive health. Learn how to read your labs and see how the MyLabInsight app works." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="/og-image-blog.png" />
-  <meta property="og:url" content="https://mylabinsight.com/blog/" />
-  <link rel="icon" href="/favicon.ico" />
-  <link rel="alternate" type="application/rss+xml" title="MyLabInsight RSS" href="/blog/rss.xml" />
+  <title>MyLabInsight — Understand Your Labs</title>
+  <meta name="description" content="Track key biomarkers, weight trends, and insights with MyLabInsight. Simple, private, and built for real-world health decisions." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%230b66c3'/%3E%3Cpath d='M30 65c10-20 30-20 40 0' stroke='%23fff' stroke-width='6' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='40' cy='45' r='5' fill='%23fff'/%3E%3Ccircle cx='60' cy='45' r='5' fill='%23fff'/%3E%3C/svg%3E" />
   <style>
+    /* ---- Base (light theme) ---- */
     :root{
-      --bg:#0b0e14; --panel:#0f1320; --muted:#9aa4b2; --text:#e8eef7; --brand:#4c8dff; --brand-2:#2ee6a6; --border:rgba(255,255,255,.08); --shadow:0 10px 30px rgba(0,0,0,.35); --radius:16px; --content:1100px;
+      --bg:#ffffff;
+      --card:#f7f9fc;
+      --muted:#6b7280;
+      --text:#0f172a;
+      --accent:#0b66c3;      /* primary */
+      --accent-2:#22a3a5;    /* secondary */
+      --ring:#cfe5ff;
+      --shadow: 0 8px 24px rgba(2, 33, 71, 0.08);
+      --radius: 14px;
+      --maxw:1100px;
     }
     *{box-sizing:border-box}
-    body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif; color:var(--text); background:radial-gradient(1200px 600px at 80% -10%, rgba(76,141,255,.18), transparent 60%), radial-gradient(1000px 500px at -10% 10%, rgba(46,230,166,.12), transparent 60%), var(--bg); -webkit-font-smoothing:antialiased}
-    a{color:inherit; text-decoration:none}
-    .container{max-width:var(--content); margin:0 auto; padding:0 20px}
-    header{position:sticky; top:0; z-index:20; backdrop-filter:saturate(180%) blur(8px); background:rgba(11,14,20,.6); border-bottom:1px solid var(--border)}
-    .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
-    .brand{display:flex; gap:.6rem; align-items:center; font-weight:800}
-    .logo{width:28px; height:28px; border-radius:8px; background:conic-gradient(from 0deg, #5a98ff, #2ee6a6, #5a98ff)}
-    .nav-links{display:flex; gap:20px; color:var(--muted)}
-    .btn{display:inline-flex; align-items:center; gap:.5rem; padding:.7rem 1rem; border-radius:12px; border:1px solid var(--border); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); box-shadow:var(--shadow)}
-
-    main{padding:42px 0}
-    h1{margin:0 0 12px; font-size:clamp(1.8rem,3.4vw,2.4rem)}
-    .lead{color:var(--muted); max-width:70ch}
-
-    .grid{display:grid; grid-template-columns:2.2fr .8fr; gap:26px; margin-top:20px}
-    .post-card{display:grid; gap:8px; padding:16px; border:1px solid var(--border); border-radius:var(--radius); background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); box-shadow:var(--shadow)}
-    .post-card h3{margin:0 0 6px; font-size:1.1rem}
-    .meta{font-size:.85rem; color:var(--muted)}
-    .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:6px}
-    .tag{font-size:.78rem; padding:.18rem .5rem; border-radius:999px; border:1px solid var(--border); color:var(--muted)}
-    .list{display:grid; gap:14px}
-
-    aside{position:relative}
-    .widget{padding:16px; border:1px solid var(--border); border-radius:var(--radius); background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)); box-shadow:var(--shadow); margin-bottom:14px}
-    .widget h4{margin:0 0 10px; font-size:1rem}
-    .search{width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--border); background:#0c1220; color:var(--text)}
-
-    footer{padding:34px 0; border-top:1px solid var(--border); color:var(--muted)}
-
-    @media(max-width:980px){
-      .grid{grid-template-columns:1fr}
+    html,body{height:100%}
+    body{
+      margin:0; font:16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text); background:var(--bg);
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:var(--maxw); margin:0 auto; padding:24px}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:.2px}
+    .brand-badge{
+      width:36px; height:36px; border-radius:10px; display:grid; place-items:center;
+      background:linear-gradient(145deg, var(--accent), var(--accent-2));
+      color:#fff; font-weight:800;
+      box-shadow:var(--shadow);
+    }
+    .nav-actions{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      border:1px solid transparent; border-radius:12px; padding:10px 16px; font-weight:600; cursor:pointer;
+      transition:transform .06s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{background:var(--accent); color:#fff; box-shadow:var(--shadow)}
+    .btn-primary:hover{filter:brightness(1.05)}
+    .btn-ghost{background:#fff; border-color:#e5e7eb; color:var(--text)}
+    .hero{
+      padding:48px 0 28px;
+      display:grid; grid-template-columns:1.15fr .85fr; gap:32px; align-items:center;
+    }
+    @media (max-width: 980px){ .hero{grid-template-columns:1fr} }
+    .hero h1{
+      font-size: clamp(28px, 4.2vw, 48px);
+      line-height:1.1; margin:0 0 12px; letter-spacing:.2px;
+    }
+    .hero p{color:var(--muted); margin:0 0 22px}
+    .hero-card{
+      background:var(--card); border:1px solid #e8eef7; border-radius:var(--radius); box-shadow:var(--shadow);
+      padding:22px;
+    }
+    .pill{
+      display:inline-block; font-size:13px; font-weight:700; color:#0b3a77;
+      background:#eaf3ff; border:1px solid var(--ring); padding:6px 10px; border-radius:999px; margin-bottom:14px;
+    }
+    .kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:16px}
+    .kpi{
+      background:#fff; border:1px solid #e9eef6; border-radius:12px; padding:14px; text-align:center;
+    }
+    .kpi .label{color:var(--muted); font-size:12px}
+    .kpi .value{font-weight:800; font-size:22px}
+    .section{padding:38px 0}
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
+    .card{
+      background:#fff; border:1px solid #e9eef6; border-radius:var(--radius); padding:18px; box-shadow:var(--shadow);
+    }
+    .card h3{margin:0 0 6px}
+    .muted{color:var(--muted)}
+    .cta{
+      margin:34px 0 10px; background:linear-gradient(145deg, #f7fbff, #f1f9ff);
+      border:1px solid #ddecff; border-radius:var(--radius); padding:22px; display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+    }
+    .footer{padding:26px 0 50px; color:var(--muted); font-size:14px}
+    .list{margin:10px 0 0; padding-left:18px}
+    /* Optional: respect user dark mode without forcing black UI */
+    @media (prefers-color-scheme: dark){
+      :root{ --bg:#0b1020; --card:#121833; --text:#eef2ff; --muted:#a3adbe; --accent:#4aa3ff; --accent-2:#2ad4d8; --ring:#2b4d80; }
+      .btn-ghost{background:transparent; border-color:#2a3352; color:var(--text)}
+      .kpi{background:#0e1530; border-color:#22315c}
+      .card{background:#0e1530; border-color:#22315c}
+      .hero-card{background:#0e1530; border-color:#22315c}
+      .cta{background:linear-gradient(145deg, #101939, #0f1733); border-color:#263a69}
     }
   </style>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Blog",
-    "url": "https://mylabinsight.com/blog/",
-    "name": "MyLabInsight Blog",
-    "description": "Evidence‑based explainers on lab results, screening schedules, and preventive health.",
-    "publisher": {
-      "@type": "Organization",
-      "name": "MyLabInsight"
-    }
-  }
-  </script>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <a class="brand" href="/"><span class="logo"></span><span>MyLabInsight</span></a>
-      <nav class="nav-links">
-        <a href="/">Home</a>
-        <a href="/blog/">Blog</a>
-        <a href="/index.html#pricing">Pricing</a>
-        <a class="btn" href="/index.html#beta">Join Beta</a>
-      </nav>
+  <header class="container nav">
+    <div class="brand">
+      <div class="brand-badge">MI</div>
+      <span>MyLabInsight</span>
+    </div>
+    <div class="nav-actions">
+      <a class="btn btn-ghost" href="#features">Features</a>
+      <a class="btn btn-ghost" href="#how">How it works</a>
+      <a class="btn btn-primary" href="#get-started">Get started</a>
     </div>
   </header>
 
   <main class="container">
-    <h1>Evidence‑based guides & app tips</h1>
-    <p class="lead">Understand your labs with peer‑reviewed context. See real app walkthroughs and practical checklists you can use before your next appointment.</p>
-
-    <div class="grid">
-      <!-- Posts list -->
-      <section aria-label="Articles" class="list" id="postList">
-        <!-- Duplicate this card for each post -->
-        <article class="post-card" data-tags="cholesterol,lipids,ldl">
-          <a href="/blog/ldl-what-your-number-means.html"><h3>LDL Cholesterol: What Your Number Means (and What’s Considered High)</h3></a>
-          <div class="meta">Updated <time datetime="2025-10-08">Oct 8, 2025</time> • 7 min read</div>
-          <p>We break down LDL ranges, risk context, and how labs should be interpreted over time — with examples from the app’s trend view.</p>
-          <div class="tags"><span class="tag">Cholesterol</span><span class="tag">LDL</span><span class="tag">Trends</span></div>
-        </article>
-        
-        <article class="post-card" data-tags="kidney,egfr,creatinine">
-          <a href="/blog/egfr-creatinine-explained.html"><h3>eGFR & Creatinine Explained: What’s Normal by Age?</h3></a>
-          <div class="meta">Updated <time datetime="2025-10-08">Oct 8, 2025</time> • 8 min read</div>
-          <p>Learn how eGFR is estimated, why creatinine depends on muscle mass, and how MyLabInsight flags meaningful changes.</p>
-          <div class="tags"><span class="tag">Kidney</span><span class="tag">eGFR</span><span class="tag">Creatinine</span></div>
-        </article>
-
-        <article class="post-card" data-tags="a1c,diabetes,screening">
-          <a href="/blog/a1c-diabetes-screening-intervals.html"><h3>A1C & Diabetes Screening: Who Should Test and How Often (ADA/USPSTF)</h3></a>
-          <div class="meta">Updated <time datetime="2025-10-08">Oct 8, 2025</time> • 6 min read</div>
-          <p>We summarize ADA + USPSTF recommendations and show how to set reminders in the app so you never miss a screening.</p>
-          <div class="tags"><span class="tag">A1C</span><span class="tag">Screening</span><span class="tag">ADA</span></div>
-        </article>
-
-        <article class="post-card" data-tags="bp,blood pressure,aha">
-          <a href="/blog/how-to-log-bp-correctly.html"><h3>How to Log Blood Pressure Correctly (AHA Technique + 4‑Reading Method)</h3></a>
-          <div class="meta">Updated <time datetime="2025-10-08">Oct 8, 2025</time> • 5 min read</div>
-          <p>Step‑by‑step on measurement technique and why multiple readings matter — with an in‑app demo of multi‑entry support.</p>
-          <div class="tags"><span class="tag">Blood Pressure</span><span class="tag">AHA</span><span class="tag">How‑to</span></div>
-        </article>
-
-      </section>
-
-      <!-- Sidebar -->
-      <aside aria-label="Sidebar">
-        <div class="widget">
-          <h4>Search</h4>
-          <input id="search" class="search" type="search" placeholder="Search posts (e.g., LDL, A1C)" />
+    <section class="hero">
+      <div>
+        <span class="pill">Simple, private, actionable</span>
+        <h1>Understand your lab results — without needing to be a clinician.</h1>
+        <p>Track key biomarkers, weight, and trends. MyLabInsight turns numbers into clear visuals and plain-English takeaways you can act on.</p>
+        <div class="nav-actions">
+          <a class="btn btn-primary" href="#get-started">Start free</a>
+          <a class="btn btn-ghost" href="#features">See features</a>
         </div>
-        <div class="widget">
-          <h4>Popular tags</h4>
-          <div class="tags" id="tags">
-            <a class="tag" href="#" data-filter="cholesterol">Cholesterol</a>
-            <a class="tag" href="#" data-filter="a1c">A1C</a>
-            <a class="tag" href="#" data-filter="kidney">Kidney</a>
-            <a class="tag" href="#" data-filter="bp">Blood Pressure</a>
+      </div>
+
+      <aside class="hero-card" aria-label="Sample dashboard preview">
+        <strong>Today’s snapshot</strong>
+        <div class="kpis">
+          <div class="kpi">
+            <div class="label">LDL-C</div>
+            <div class="value">102 mg/dL</div>
+          </div>
+          <div class="kpi">
+            <div class="label">A1C</div>
+            <div class="value">5.4%</div>
+          </div>
+          <div class="kpi">
+            <div class="label">BP (avg)</div>
+            <div class="value">118 / 74</div>
           </div>
         </div>
-        <div class="widget">
-          <h4>Get updates</h4>
-          <p class="lead" style="font-size:.95rem">Join the beta and get new article alerts.</p>
-          <a class="btn" href="/index.html#beta">Join Beta</a>
-        </div>
-        <div class="widget">
-          <h4>About</h4>
-          <p class="lead" style="font-size:.95rem">MyLabInsight helps you understand lab results with peer‑reviewed context, trends, and screening reminders. Privacy‑first and educational.</p>
-        </div>
+        <p class="muted" style="margin-top:12px">Demo values for illustration. Your data stays private.</p>
       </aside>
-    </div>
+    </section>
+
+    <section id="features" class="section">
+      <h2>Focus on what matters</h2>
+      <div class="grid" style="margin-top:10px">
+        <div class="card">
+          <h3>Biomarker tracking</h3>
+          <p class="muted">Start with LDL-C, HDL-C, triglycerides, A1C, and blood pressure. Expand over time as you like.</p>
+        </div>
+        <div class="card">
+          <h3>Weight & trends</h3>
+          <p class="muted">See rolling averages and trend arrows so one off-day never throws you.</p>
+        </div>
+        <div class="card">
+          <h3>Clear insights</h3>
+          <p class="muted">Plain-English context and ranges sourced from current clinical guidelines.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section">
+      <h2>How it works</h2>
+      <div class="card">
+        <ol class="list">
+          <li>Add your recent lab numbers (or paste from your portal).</li>
+          <li>We visualize trends and highlight what changed.</li>
+          <li>Get simple guidance you can discuss with your clinician.</li>
+        </ol>
+      </div>
+      <div class="cta">
+        <div>
+          <strong>Ready to try it?</strong>
+          <div class="muted">Start free. Your data stays on your device unless you choose to sync.</div>
+        </div>
+        <a id="get-started" class="btn btn-primary" href="#">Get started</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>What’s coming next</h2>
+      <div class="grid" style="margin-top:10px">
+        <div class="card">
+          <h3>Wearable integrations</h3>
+          <p class="muted">Optional connections to Apple Health, Fitbit, and more.</p>
+        </div>
+        <div class="card">
+          <h3>Smart reminders</h3>
+          <p class="muted">Gentle nudges for re-tests and follow-ups based on your results.</p>
+        </div>
+        <div class="card">
+          <h3>Private backups</h3>
+          <p class="muted">Encrypted sync so switching devices is painless.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <div class="container" style="display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap">
-      <div style="display:flex; gap:.6rem; align-items:center"><span class="logo"></span><span>MyLabInsight</span></div>
-      <div style="display:flex; gap:14px; flex-wrap:wrap"><a href="/">Home</a><a href="/index.html#pricing">Pricing</a><a href="/index.html#beta">Join Beta</a><a href="/blog/rss.xml">RSS</a></div>
-      <small style="color:var(--muted)">© <span id="year"></span> MyLabInsight. Educational use only.</small>
-    </div>
+  <footer class="container footer">
+    <div>© <span id="y"></span> MyLabInsight. All rights reserved.</div>
+    <div class="muted">This site is for informational purposes only and is not medical advice.</div>
   </footer>
 
-  <script>
-    // Simple client-side filtering for demo purposes
-    const list = document.getElementById('postList');
-    const search = document.getElementById('search');
-    const tagBox = document.getElementById('tags');
-
-    function filterPosts() {
-      const q = (search.value || '').toLowerCase();
-      const activeTag = tagBox.querySelector('.tag.active');
-      [...list.children].forEach(card => {
-        const text = card.innerText.toLowerCase();
-        const tags = (card.dataset.tags || '').toLowerCase();
-        const matchQ = !q || text.includes(q);
-        const matchTag = !activeTag || tags.includes(activeTag.dataset.filter);
-        card.style.display = matchQ && matchTag ? 'grid' : 'none';
-      });
-    }
-
-    search?.addEventListener('input', filterPosts);
-    tagBox?.addEventListener('click', (e) => {
-      const t = e.target.closest('.tag');
-      if(!t) return;
-      e.preventDefault();
-      tagBox.querySelectorAll('.tag').forEach(x => x.classList.remove('active'));
-      t.classList.add('active');
-      filterPosts();
-    });
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
-
-<!-- ============================= -->
-<!-- ===== POST TEMPLATE HTML ===== -->
-<!-- Save the block below as /blog/post-template.html and duplicate for each post -->
-
-<!--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LDL Cholesterol: What Your Number Means – MyLabInsight</title>
-  <meta name="description" content="Understand LDL ranges, risk context, and how to track LDL trends over time with examples from the MyLabInsight app." />
-  <meta property="og:title" content="LDL Cholesterol: What Your Number Means" />
-  <meta property="og:description" content="Understand LDL ranges, risk context, and how to track LDL trends over time with examples from the MyLabInsight app." />
-  <meta property="og:type" content="article" />
-  <meta property="og:image" content="/og-image-ldl.png" />
-  <meta property="og:url" content="https://mylabinsight.com/blog/ldl-what-your-number-means.html" />
-  <link rel="icon" href="/favicon.ico" />
-  <link rel="stylesheet" href="/blog/styles.css" /> <!-- optional separate CSS if you split it -->
-  <style>
-    :root{--bg:#0b0e14; --panel:#0f1320; --muted:#9aa4b2; --text:#e8eef7; --brand:#4c8dff; --border:rgba(255,255,255,.08); --radius:16px; --content:860px}
-    *{box-sizing:border-box}
-    body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif; color:var(--text); background:radial-gradient(1000px 500px at 80% -10%, rgba(76,141,255,.18), transparent 60%), var(--bg)}
-    a{color:inherit; text-decoration:none}
-    .container{max-width:var(--content); margin:0 auto; padding:0 20px}
-    header{position:sticky; top:0; z-index:20; backdrop-filter:saturate(180%) blur(8px); background:rgba(11,14,20,.6); border-bottom:1px solid var(--border)}
-    .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
-    .brand{display:flex; gap:.6rem; align-items:center; font-weight:800}
-    .logo{width:28px; height:28px; border-radius:8px; background:conic-gradient(from 0deg, #5a98ff, #2ee6a6, #5a98ff)}
-    main{padding:42px 0}
-    h1{margin:0 0 8px; font-size:clamp(1.7rem,3.2vw,2.2rem)}
-    .meta{color:var(--muted); font-size:.9rem}
-    .prose{margin-top:16px; line-height:1.75; color:#eaf1fb}
-    .prose h2{margin-top:28px}
-    .panel{margin-top:18px; padding:14px; border:1px solid var(--border); border-radius:var(--radius); background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02))}
-    .toc{font-size:.95rem}
-    .footer{padding:34px 0; border-top:1px solid var(--border); color:#9aa4b2}
-    .btn{display:inline-flex; align-items:center; gap:.5rem; padding:.7rem 1rem; border-radius:12px; border:1px solid var(--border); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02))}
-  </style>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "LDL Cholesterol: What Your Number Means",
-    "datePublished": "2025-10-08",
-    "dateModified": "2025-10-08",
-    "author": {"@type": "Person", "name": "MyLabInsight Team"},
-    "publisher": {"@type": "Organization", "name": "MyLabInsight"},
-    "description": "Understand LDL ranges, risk context, and how to track LDL trends over time with examples from the MyLabInsight app.",
-    "mainEntityOfPage": {"@type": "WebPage","@id": "https://mylabinsight.com/blog/ldl-what-your-number-means.html"}
-  }
-  </script>
-</head>
-<body>
-  <header>
-    <div class="container nav">
-      <a class="brand" href="/"><span class="logo"></span><span>MyLabInsight</span></a>
-      <nav><a href="/blog/">Blog</a> · <a href="/index.html#beta">Join Beta</a></nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <h1>LDL Cholesterol: What Your Number Means</h1>
-    <div class="meta">Updated <time datetime="2025-10-08">Oct 8, 2025</time> • <span id="readTime">6</span> min read • Tags: <a href="/blog/">Cholesterol</a>, <a href="/blog/">LDL</a></div>
-
-    <div class="panel toc">
-      <strong>On this page</strong>
-      <ol id="toc"></ol>
-    </div>
-
-    <article class="prose" id="article">
-      <p>Intro: quick context on LDL and why single point‑in‑time numbers can mislead. Emphasize trends & guideline context. Mention that the app helps track the trend view over months.</p>
-      <h2>LDL ranges & risk context</h2>
-      <p>Explain typical cutoffs and context. Cite ADA/AHA/AUA as appropriate.</p>
-      <h2>Why trends matter more than one lab</h2>
-      <p>Show example scenario (imaginary numbers) and discuss interpretation over time.</p>
-      <h2>How to track LDL in MyLabInsight</h2>
-      <p>Short walkthrough with screenshots (insert images) and link back to app page.</p>
-      <h2>What to discuss with your clinician</h2>
-      <p>Educational prompts and preparation tips. Remind: this is not medical advice.</p>
-      <h2>References</h2>
-      <ul>
-        <li>ADA Standards of Care (2025)</li>
-        <li>AHA/ACC Guidelines (2025)</li>
-      </ul>
-    </article>
-
-    <div class="panel" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:24px">
-      <a class="btn" href="/index.html#beta">Try the app</a>
-      <a class="btn" href="/blog/">Back to Blog</a>
-    </div>
-  </main>
-
-  <footer class="footer">
-    <div class="container" style="display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap">
-      <div><strong>MyLabInsight</strong> — Educational only. Not medical advice.</div>
-      <div><a href="/blog/rss.xml">RSS</a> · <a href="/index.html#beta">Join Beta</a></div>
-    </div>
-  </footer>
-
-  <script>
-    // Build a simple TOC from h2 elements
-    const toc = document.getElementById('toc');
-    const article = document.getElementById('article');
-    const headers = article.querySelectorAll('h2');
-    headers.forEach((h, i) => {
-      const id = 'sec-' + (i+1);
-      h.id = id; const li = document.createElement('li');
-      const a = document.createElement('a'); a.href = '#' + id; a.textContent = h.textContent; li.appendChild(a); toc.appendChild(li);
-    });
-    // Estimate read time (200 wpm)
-    const text = article.innerText || article.textContent; const words = text.trim().split(/\s+/).length; document.getElementById('readTime').textContent = Math.max(3, Math.round(words/200));
-  </script>
-</body>
-</html>
--->
